@@ -1,13 +1,13 @@
-# List if all account created
-all_accounts = []
-
 class BankAccount:
+
+    # List if all account created
+    all_accounts = []
 
     '''Create User's Bank Account'''
     def __init__(self, interest, balance = 0):
         self.interest = interest
         self.balance = balance
-        all_accounts.append(self)
+        BankAccount.all_accounts.append(self)
 
     def deposit(self, amount):
         self.balance+=amount
@@ -33,7 +33,7 @@ class BankAccount:
 
     @classmethod
     def display_all_accounts(cls):
-        for account in all_accounts:
+        for account in BankAccount.all_accounts:
             account.display_account_info()
 
 
