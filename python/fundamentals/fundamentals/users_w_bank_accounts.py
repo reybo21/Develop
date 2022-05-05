@@ -131,16 +131,46 @@ class BankAccount:
         for account in BankAccount.all_accounts:
             account.display_account_info()
 
+    @classmethod
+    def yield_interest_on_all_accounts(cls):
+        for account in BankAccount.all_accounts:
+            BankAccount.all_accounts[account].yield_interest()
 
+
+print("------------------------------")
+print("Create Users and Accounts Test")
+print("------------------------------")
 wadealicious = User('wade','young','wadealicious@gmail.com', 22)
 reybodacious = User('rey','bosque','reybodacious@aol.com', 18)
 wadealicious.add_account(0.2, 10000, '6495785214')
 wadealicious.add_account(0.2, 500, '1458764852')
 reybodacious.add_account(0.2,500,'5648951247')
 
+print("----------------------------------")
+print("Make Deposits and Withdrawal Tests")
+print("----------------------------------")
 wadealicious.make_deposit(1000,'1458764852')
 wadealicious.make_deposit(100,'1458764852')
 wadealicious.make_deposit(1000,'6495785214')
+wadealicious.make_withdrawal(1000,'6495785214')
+
+print("-------------------------------------------------------")
+print("Transfer funds to own account and another users account")
+print("-------------------------------------------------------")
 wadealicious.transfer_money(500,'6495785214','1458764852')
 wadealicious.transfer_money(500,'6495785214','5648951247')
+
+print("------------------------------------------------------------------------------------------------------")
+print("Checks all account numbers tied to user and displays error upon attempting to access account not owned")
+print("------------------------------------------------------------------------------------------------------")
 wadealicious.display_account_numbers().display_user_balance('5648951247')
+
+print("-------------------------------")
+print("Yield interest on accounts test")
+print("-----------Before--------------")
+wadealicious.display_user_balance('6495785214').display_user_balance('1458764852')
+reybodacious.display_user_balance('5648951247')
+BankAccount.yield_interest_on_all_accounts()
+print("------------After--------------")
+wadealicious.display_user_balance('6495785214').display_user_balance('1458764852')
+reybodacious.display_user_balance('5648951247')
